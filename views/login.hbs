@@ -1,0 +1,126 @@
+{{!--
+ * Copyright (C) 2016 SailPoint Technologies, Inc.  All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+--}}
+<h1>{{title}}</h1>
+<p>Please sign in.</p>
+
+<form id="login-form" action="javascript:void(0)">
+	user name: <input name="username" type="text"><br>
+	password: <input name="password" type="password"><br>
+	<input type="submit" value="Sign In">
+</form>
+<br>
+
+{{!-- div for error messages --}}
+<div id="error-msg" style="color:red"></div>
+
+<script>
+	// Local implementation of a utility to read query parameters from a
+	// URL.  If you have a favorite utility such as jQuery, use that instead.
+	var getQueryParams = function(paramStr) {
+		paramStr = paramStr || window.location.search;
+		if (!paramStr) return {};
+		if (paramStr.charAt(0) === '?') {
+			paramStr = paramStr.substr(1);
+		}
+
+		var pairs = paramStr.split(/[&\;]+/);
+
+		var params = {};
+		for (var i = 0; i < pairs.length; ++i) {
+			var p = pairs[i].split('=', 2);
+			if (p.length != 2) continue;
+			var value = decodeURIComponent(p[1].replace(/\+/g, ' '));
+			switch(typeof params[p[0]]) {
+			case 'undefined':
+				params[p[0]] = value;
+				break;
+			case 'string':
+				var arr = [];
+				arr.push(params[p[0]]);
+				arr.push(value);
+				params[p[0]] = arr;
+				break;
+			default:
+				params[p[0]].push(value);
+			}
+		}
+		return params;
+	}
+</script>
+
+{{!---------------------------------------------------------------------------}}
+
+{{!--
+ SLPT.auth.login() is in version 1.2.0 and higher.  JSDoc comments can be
+ found within any non-minified library. You can also use:
+ * slpt-identitynow-1.2.0.min.js : minified
+ * slpt-identitynow.js : will always contain the latest version
+ * slpt-identitynow.min.js : latest version, minified
+--}}
+<script src="https://files.accessiq.sailpoint.com/integrations/lib/slpt-identitynow-1.2.0.js"></script>
+
+<script>
+	// set this to your IdentityNow base URL
+	var baseUrl = 'https://acme-corp.identitynow.com/';
+
+	// show error message if applicable
+	var err = document.getElementById('error-msg');
+	if (err && getQueryParams().error) {
+		err.innerHTML = 'Authentication failed.';
+	}
+
+	var form = document.getElementById('login-form');
+	if (form) {
+		// error callback handler, called if an error occurs prior to
+		// the authentication post attempt
+		var errorHandler = function(status, msg) {
+			var err = document.getElementById('error-msg');
+			if (err) {
+				err.innerHTML = '[' + status + '] ' + (msg || '');
+			}
+		};
+
+		form.addEventListener('submit', function(event) {
+			var els = event.target.elements;
+
+			// Invoking login() with a single config object.
+			// The gotoUrl value, available as the 'goto' query parameter,
+			// must not be URL-encoded.  If needed, decode using
+			// decodeURIComponent().
+			SLPT.auth.login({
+				username: els.namedItem('username').value,
+				password: els.namedItem('password').value,
+				baseUrl: baseUrl,
+				errorCallback: errorHandler
+				// org: getQueryParams().org,  // shown are the defaults
+				// gotoUrl: getQueryParams().gotoUrl  // shown are the defaults
+			});
+
+			// Alternatively, you can invoke login() with discrete, positional
+			// parameters.
+			/*
+			SLPT.auth.login(
+				els.namedItem('username').value,  // username
+				els.namedItem('password').value,  // password
+				baseUrl,  // baseUrl
+				errorHandler,  // errorCallback
+				getQueryParams().org,  // org; shown are the defaults
+				getQueryParams().gotoUrl  // gotoUrl; shown are the defaults
+			);
+			*/
+		});
+	}
+</script>

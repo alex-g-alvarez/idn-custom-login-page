@@ -1,0 +1,31 @@
+# Eclipse
+.buildpath
+.classpath
+.project
+.settings/
+
+# IntelliJ
+*.iml
+*.ipr
+.idea/
+/out/
+
+# Xcode
+*.pbxuser
+*.xcuserstate
+project.xcworkspace/
+xcuserdat/
+
+# Emacs
+*~
+\#*#
+
+# Vim
+*.swp
+
+# OSX
+*.DS_Store
+
+# Node
+npm-debug.log*
+/node_modules/
