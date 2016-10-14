@@ -96,8 +96,8 @@ and JavaScript.
   login page URL, the org name (script name) and goto URL are made available as
   query parameters.  Therefore, if you wish to show different login pages
   (views) depending on the value of the org name or goto URL, use an MVC
-  framework where controller can evaluate the values of the org or goto query
-  parameters and choose a login view accordingly.
+  framework where the controller can evaluate the values of the org and goto
+  query parameters and choose a login view accordingly.
 
 ## Commands
 
