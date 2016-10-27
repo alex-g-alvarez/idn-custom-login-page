@@ -105,6 +105,7 @@ and JavaScript.
 * `npm start` - Starts the site running on port 3000.  See `/bin/www` to change.
 
 ## Versions
-1.0.0 - Initial.
+* 1.0.0 - Initial.
+* 1.0.1 - login.hbs edited for clarity, using an IIFE following best practice.
 
 Copyright (c) 2016 SailPoint Technologies, Inc.  All rights reserved.
