@@ -79,8 +79,8 @@ and JavaScript.
    out will redirect you back to the portal page.  In order for the `goto` URL
    value to be honored, you must register the URL pattern in IdentityNow
    (Admin > Global > Security Settings > Redirect Patterns).  For details,
-   refer to this document in Compass:
-   [https://community.sailpoint.com/docs/DOC-6786](https://community.sailpoint.com/docs/DOC-6786)
+   refer to this document on Compass:
+   [Redirect Patterns](https://community.sailpoint.com/docs/DOC-6786)
 3. Once configured, you can log out by clicking the link.
 
 ## Notes
@@ -96,8 +96,8 @@ and JavaScript.
   login page URL, the org name (script name) and goto URL are made available as
   query parameters.  Therefore, if you wish to show different login pages
   (views) depending on the value of the org name or goto URL, use an MVC
-  framework where controller can evaluate the values of the org or goto query
-  parameters and choose a login view accordingly.
+  framework where the controller can evaluate the values of the org and goto
+  query parameters and choose a login view accordingly.
 
 ## Commands
 
