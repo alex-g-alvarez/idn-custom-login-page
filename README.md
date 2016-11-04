@@ -15,7 +15,8 @@ use your custom login page.
 This sample uses Node.js, Express, and Handlebars.js.  Although prior
 knowledge in these technologies is not required, you should be comfortable in
 HTML and JavaScript, as the main usage samples are written using unadorned HTML
-and JavaScript.
+and JavaScript.  You are encouraged to take the sample HTML and JavaScript
+in `login.hbs` and adapt it to any web server of your choosing.
 
 ## Prerequisites
 
@@ -53,16 +54,23 @@ and JavaScript.
        `<baseUrl>/api/org/get`.
 5. Configure one or more federated-authentication apps within IdentityNow
    (Admin > Application).
-6. Populate the "favorite apps" within this sample portal.  Within each app in
-   IdentityNow, copy its primary link into an `<a href="">` tag in
-   `/views/index.hbs`, to serve as your favorite apps within your portal.
-   For each link URL copied over:
-    1. Replace `$org.realm` with the script name of your org.  A typical
-       IdentityNow URL has the pattern of `https://<org>.identitynow.com/`.
-    2. Replace `$org.ssoServerUrl` with the SSO URL for your org.  This can be
-       obtained by sending an HTTP GET request to
-       `<baseUrl>/login/get?username=<userName>`.  It should be similar to
-       `https://<org>-sso.identitynow.com/sso`.
+6. Populate the "favorite apps" within this sample portal.  For apps in
+   IdentityNow, copy  one or more links into an `<a href="">` tag in
+   `/views/index.hbs` to serve as your favorite apps within your portal.
+    1. Sign in to IdentityNow and add any number of apps to your launchpad.
+    2. Start your browser's Developer Tools (a.k.a. Debugger), select its
+       Network tab, and while on your IdentityNow launchpad, refresh the
+       browser.
+    3. Within the Network tab, find the HTTP GET request to
+       `api/app/list?filter=added` (along with a few more query parameter).
+       Click to select the entry and examine its response body.
+    4. The response body is a JSON array of objects, each representing a
+       launcher on your launchpad.  Within each object, the `url` attribute
+       can be copied into your sample portal's `<a href="">` value.  If a
+       launcher has alternate links, they are found in the `links` attribute.
+    5. Collect and copy over as many app `url` values to the sample portal
+       as you wish.  You can also add these to your browser's bookmarks to
+       directly invoke the app without starting from a portal or launchpad.
 7. Start the sample site.  Run `npm install` once to install dependent modules,
    then `npm start` thereafter to start the server.
 8. Open your browser to `http://localhost:3000` to bring up the portal and
@@ -107,5 +115,7 @@ and JavaScript.
 ## Versions
 * 1.0.0 - Initial.
 * 1.0.1 - login.hbs edited for clarity, using an IIFE following best practice.
+* 1.0.2 - README.md step 6 updated with simpler steps to fetch launcher URLs.
+API reference within JS library called out in login.hbs.  No logic changes.
 
 Copyright (c) 2016 SailPoint Technologies, Inc.  All rights reserved.
