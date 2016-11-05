@@ -17,13 +17,13 @@
 <p>Here are your favorite apps:</p>
 
 {{!--
- First, configure your federated authentication apps in IdentityNow, then
- copy the primary link of each app to the 'href'.  Within each URL, replace
- '$org.realm' with your org name, and '$org.ssoServerUrl` with the 'postUrl'
- value returned from a GET request to <baseUrl>/login/get?username=<userName>.
+ Configure your federated authentication apps in IdentityNow, then using your
+ browser's debugger, navigate to the launchpad and look for a GET request to
+ 'api/app/list?filter=app'.  The response body is a JSON array of objects,
+ each with a 'url' attribute that can be used as the href value below.
 --}}
-<a href="<http://host:port/primary_link_of_an_app>" target="_blank">My First Favorite App</a><br>
-<a href="<http://host:port/primary_link_of_an_app>" target="_blank">My Second Favorite App</a><br>
+<a href="launcher_url_for_an_app" target="_blank">My First Favorite App</a><br>
+<a href="launcher_url_for_an_app" target="_blank">My Second Favorite App</a><br>
 
 {{!--
  Link to end the current session.  The 'goto' value must adhere to one of the

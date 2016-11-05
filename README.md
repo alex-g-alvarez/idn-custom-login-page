@@ -116,6 +116,8 @@ in `login.hbs` and adapt it to any web server of your choosing.
 * 1.0.0 - Initial.
 * 1.0.1 - login.hbs edited for clarity, using an IIFE following best practice.
 * 1.0.2 - README.md step 6 updated with simpler steps to fetch launcher URLs.
-API reference within JS library called out in login.hbs.  No logic changes.
+API reference within JS library called out in login.hbs.  No code changes.
+* 1.0.3 - Fix gotoUrl -> goto default values in login.hbs comments.  No code
+changes.
 
 Copyright (c) 2016 SailPoint Technologies, Inc.  All rights reserved.
