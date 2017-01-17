@@ -27,22 +27,19 @@
 <div id="error-msg" style="color:red"></div>
 
 {{!--
- SLPT.auth.login() is in version 1.2.0 and higher.  You can also use:
- * slpt-identitynow-1.2.0.min.js : minified
- * slpt-identitynow.js : will always contain the latest version
- * slpt-identitynow.min.js : latest version, minified
+ SLPT.auth.login() is in version 2.0.0 and higher.  You can also use:
+ * slpt-identitynow-2.0.0.min.js : minified
+ * slpt-identitynow-2.x.x.js : will always contain the latest version
+ * slpt-identitynow-2.x.x.min.js : latest version, minified
 
  JSDoc comments describing the APIs and their arguments can be found within
  any non-minified library.  Simply open your browser with the URL of the
  script src value.
 --}}
-<script src="https://files.accessiq.sailpoint.com/integrations/lib/slpt-identitynow-1.2.0.js"></script>
+<script src="https://files.accessiq.sailpoint.com/integrations/lib/slpt-identitynow-2.0.0.min.js"></script>
 
 <script>
 (function() {
-	// set this to your IdentityNow base URL
-	var baseUrl = 'https://acme-corp.identitynow.com/';
-
 	// register the submit event handler, which attempts the login
 	var form = document.getElementById('login-form');
 	if (form) {
@@ -65,16 +62,16 @@
 		var els = event.target.elements;
 
 		// Invoke login() with a single config object.
-		// The gotoUrl value, available as the 'goto' query parameter,
-		// must not be URL-encoded.  If needed, decode using
-		// decodeURIComponent().
+		// The gotoUrl value, available as the 'goto' query parameter, must not
+		// be URL-encoded.  If needed, decode using decodeURIComponent().
+		// Values that typically do not need to be overridden are commented out.
 		SLPT.auth.login({
 			username: els.namedItem('username').value,
 			password: els.namedItem('password').value,
-			baseUrl: baseUrl,
+			// baseUrl: 'https://<org>.api.identitynow.com/',  // shown is the default
 			errorCallback: errorHandler
-			// org: getQueryParams().org,  // shown are the defaults
-			// gotoUrl: getQueryParams().goto  // shown are the defaults
+			// org: getQueryParams().org,  // shown is the default
+			// gotoUrl: getQueryParams().goto  // shown is the default
 		});
 
 		// Alternatively, you can invoke login() with discrete, positional
@@ -83,10 +80,10 @@
 		SLPT.auth.login(
 			els.namedItem('username').value,  // username
 			els.namedItem('password').value,  // password
-			baseUrl,  // baseUrl
+			null,  // baseUrl; uses default value 'https://<org>.api.identitynow.com/'
 			errorHandler,  // errorCallback
-			getQueryParams().org,  // org; shown are the defaults
-			getQueryParams().goto  // gotoUrl; shown are the defaults
+			null,  // org; uses default value getQueryParams().org
+			null  // gotoUrl; uses default value getQueryParams().goto
 		);
 		*/
 	};

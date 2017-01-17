@@ -31,9 +31,7 @@ in `login.hbs` and adapt it to any web server of your choosing.
     1. `/views/login.hbs`: a login page, which pulls in and uses functions in
        the IdentityNow JavaScript library
     2. `/views/index.hbs`: a "portal" page containing links to your apps
-3. In `/views/login.hbs`, change the `var baseUrl =` value to the base URL of
-   your IdentityNow site.
-4. Configure IdentityNow to use the sample login page.  This requires making an
+3. Configure IdentityNow to use the sample login page.  This requires making an
    HTTP request to update your org's configuration.  Here are the basic steps
    using Chrome's Postman extension:
     1. Using Chrome, sign in to IdentityNow as an admin.
@@ -52,9 +50,9 @@ in `login.hbs` and adapt it to any web server of your choosing.
        port, defined in `/bin/www`.
     6. To verify your settings, send an HTTP GET request to
        `<baseUrl>/api/org/get`.
-5. Configure one or more federated-authentication apps within IdentityNow
+4. Configure one or more federated-authentication apps within IdentityNow
    (Admin > Application).
-6. Populate the "favorite apps" within this sample portal.  For apps in
+5. Populate the "favorite apps" within this sample portal.  For apps in
    IdentityNow, copy  one or more links into an `<a href="">` tag in
    `/views/index.hbs` to serve as your favorite apps within your portal.
     1. Sign in to IdentityNow and add any number of apps to your launchpad.
@@ -71,9 +69,9 @@ in `login.hbs` and adapt it to any web server of your choosing.
     5. Collect and copy over as many app `url` values to the sample portal
        as you wish.  You can also add these to your browser's bookmarks to
        directly invoke the app without starting from a portal or launchpad.
-7. Start the sample site.  Run `npm install` once to install dependent modules,
+6. Start the sample site.  Run `npm install` once to install dependent modules,
    then `npm start` thereafter to start the server.
-8. Open your browser to `http://localhost:3000` to bring up the portal and
+7. Open your browser to `http://localhost:3000` to bring up the portal and
    click on a link to open one of your apps.  If configured properly, you should
    be redirected to your login page (at `http://localhost:3000/login`).  If you
    enter valid IdentityNow credentials, you should gain access to your app.
@@ -119,5 +117,7 @@ in `login.hbs` and adapt it to any web server of your choosing.
 API reference within JS library called out in login.hbs.  No code changes.
 * 1.0.3 - Fix gotoUrl -> goto default values in login.hbs comments.  No code
 changes.
+* 1.1.0 - Updated to the 2.0.0 version of the JS library, which is required
+to make a CORS request.  Removed the baseUrl value.
 
 Copyright (c) 2016 SailPoint Technologies, Inc.  All rights reserved.
